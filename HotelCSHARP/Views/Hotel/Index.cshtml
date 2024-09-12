@@ -10,7 +10,23 @@
         <a class="btn btn-success mx-2" asp-controller="Hotel" asp-action="Reservar">Realizar uma nova Reserva</a>
 
 
-    </div>
+    </div> <!--Botões-->
+    @if (TempData["MensagemSucesso"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["MensagemSucesso"]
+        </div>
+    }
+
+    @if (TempData["MensagemError"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["MensagemError"]
+        </div>
+    } <!--MENSAGENS DE SUCESSO E ERROR-->
+
+
+
 
 
 

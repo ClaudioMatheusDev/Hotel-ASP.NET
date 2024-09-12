@@ -1,88 +1,71 @@
-﻿@model HotelModel //Declarando a model HOTEL para realizar todas os procedimentos dele
+﻿@model HotelCSHARP.Models.HotelModel // Declarando o modelo para o formulário
 
 @{
-    ViewData["tittle"] = "Cadastrar nova Reserva!"; //MODIFICANDO O NOME DA PAGINA
+    ViewData["Title"] = "Cadastrar nova Reserva!"; // Corrigido o nome da página
+}
 
-
-    <div class="container bg-dark p-5 rounded-5">
-    
-    
+<div class="container bg-dark p-5 rounded-5">
     <div class="mb-5 text-center">
         <h1 class="text-light">Cadastro de nova Reserva</h1>
     </div>
 
-        <form method="post" asp-controller="Hotel" asp-action="Reservar">
+    <form method="post" asp-controller="Hotel" asp-action="Reservar">
+        <div class="mb-3">
+            <label for="Nome" class="form-label text-light">Nome:</label>
+            <input type="text" class="form-control text-dark" asp-for="Nome" id="Nome" placeholder="Primeiro nome:" />
+            <span class="text-danger" asp-validation-for="Nome"></span>
+        </div>
+
+        <div class="mb-3">
+            <label for="SobreNome" class="form-label text-light">Sobrenome:</label>
+            <input type="text" class="form-control text-dark" asp-for="SobreNome" id="SobreNome" placeholder="Sobrenome:" />
+            <span class="text-danger" asp-validation-for="SobreNome"></span>
+        </div>
+
+        <div class="mb-3">
+            <label for="NumeroQuarto" class="form-label text-light">Número do quarto:</label>
+            <input type="text" class="form-control text-dark" asp-for="NumeroQuarto" id="NumeroQuarto" placeholder="Número do quarto:" />
+            <span class="text-danger" asp-validation-for="NumeroQuarto"></span>
+        </div>
+
+        <div class="mb-3">
+            <label for="PrecoPorNoite" class="form-label text-light">Preço por Noite:</label>
+            <input type="number" step="0.01" class="form-control text-dark" asp-for="PrecoPorNoite" id="PrecoPorNoite" placeholder="Preço por noite:" />
+            <span class="text-danger" asp-validation-for="PrecoPorNoite"></span>
+        </div>
+
+        <div class="mb-3">
+            <label for="CheckIn" class="form-label text-light">Data de Entrada:</label>
+            <input type="date" class="form-control text-dark" asp-for="CheckIn" id="CheckIn" />
+            <span class="text-danger" asp-validation-for="CheckIn"></span>
+        </div>
+
+        <div class="mb-3">
+            <label for="CheckOut" class="form-label text-light">Data de Saída:</label>
+            <input type="date" class="form-control text-dark" asp-for="CheckOut" id="CheckOut" />
+            <span class="text-danger" asp-validation-for="CheckOut"></span>
+        </div>
+
+        <div class="mb-3">
+            <label for="Contato" class="form-label text-light">Telefone:</label>
+            <input type="tel" class="form-control text-dark" asp-for="Contato" id="Contato" placeholder="Telefone:" />
+            <span class="text-danger" asp-validation-for="Contato"></span>
+        </div>
+
+        <div class="mb-3">
+            <label for="StatusReserva" class="form-label text-light">Status Reserva:</label>
+            <input type="tel" class="form-control text-dark" asp-for="StatusReserva" id="StatusReserva" placeholder="Status Reserva:" />
+            <span class="text-danger" asp-validation-for="StatusReserva"></span>
+        </div>
 
 
-            <div class="mb-3">
-                <label for="Nome" class="form-label text-light">Nome:</label>
-                <input type="text" class="form-control text-dark" asp-for="Nome" id="Nome" placeholder="Primeiro nome:">
-                <span class="text-danger" asp-validation-for="Nome"></span> <!-- ADICIONANDO O SPAN, ERROR MESSAGE QUE ADICIONAMOS NO NOSSO EMPRESTIMO MODEL, UTILIZANDO O ASP-VALIDATION-FOR -->
-            </div><!-- NOME -->
-            
-
-            <div class="mb-3">
-                <label for="SobreNome" class="form-label text-light">SobreNome:</label>
-                <input type="text" class="form-control text-dark" asp-for="SobreNome" id="SobreNome" placeholder="Sobrenome:">
-                <span class="text-danger" asp-validation-for="SobreNome"></span> <!-- ADICIONANDO O SPAN, ERROR MESSAGE QUE ADICIONAMOS NO NOSSO EMPRESTIMO MODEL, UTILIZANDO O ASP-VALIDATION-FOR -->
-            </div><!-- SOBRENOME -->
-
-            <div class="mb-3">
-                <label for="NumeroQuarto" class="form-label text-light">Número do quarto:</label>
-                <input type="text" class="form-control text-dark" asp-for="NumeroQuarto" id="NumeroQuarto" placeholder="NumeroQuarto:">
-                <span class="text-danger" asp-validation-for="NumeroQuarto"></span> <!-- ADICIONANDO O SPAN, ERROR MESSAGE QUE ADICIONAMOS NO NOSSO EMPRESTIMO MODEL, UTILIZANDO O ASP-VALIDATION-FOR -->
-            </div><!-- NÚMERO DO QUARTO -->
-
-            <div class="mb-3">
-                <label for="PrecoPorNoite" class="form-label text-light">Preco Por Noite:</label>
-                <input type="text" class="form-control text-dark" asp-for="PrecoPorNoite" id="PrecoPorNoite" placeholder="Preco Por Noite:">
-                <span class="text-danger" asp-validation-for="PrecoPorNoite"></span> <!-- ADICIONANDO O SPAN, ERROR MESSAGE QUE ADICIONAMOS NO NOSSO EMPRESTIMO MODEL, UTILIZANDO O ASP-VALIDATION-FOR -->
-            </div><!-- PREÇO POR NOITE -->
-
-            <div class="mb-3">
-                <label for="CheckIn" class="form-label text-light">Data de entrada:</label>
-                <input type="text" class="form-control text-dark" asp-for="CheckIn" id="CheckIn" placeholder="Data de entrada:">
-                <span class="text-danger" asp-validation-for="CheckIn"></span> <!-- ADICIONANDO O SPAN, ERROR MESSAGE QUE ADICIONAMOS NO NOSSO EMPRESTIMO MODEL, UTILIZANDO O ASP-VALIDATION-FOR -->
-            </div> <!-- DATA DE CHECKIN -->
-
-            <div class="mb-3">
-                <label for="CheckOut" class="form-label text-light">Data de saida:</label>
-                <input type="text" class="form-control text-dark" asp-for="CheckOut" id="CheckOut" placeholder="Data de saida:">
-                <span class="text-danger" asp-validation-for="CheckOut"></span> <!-- ADICIONANDO O SPAN, ERROR MESSAGE QUE ADICIONAMOS NO NOSSO EMPRESTIMO MODEL, UTILIZANDO O ASP-VALIDATION-FOR -->
-            </div> <!-- DATA DE CHECKIN -->
-
-            <div class="mb-3">
-                <label for="Contato" class="form-label text-light">Telefone:</label>
-                <input type="text" class="form-control text-dark" asp-for="Contato" id="Contato" placeholder="Telefone:">
-                <span class="text-danger" asp-validation-for="Contato"></span> <!-- ADICIONANDO O SPAN, ERROR MESSAGE QUE ADICIONAMOS NO NOSSO EMPRESTIMO MODEL, UTILIZANDO O ASP-VALIDATION-FOR -->
-            </div> <!-- DATA DE CHECKIN -->
 
 
 
-            <!--ASP-FOR SERIA É FORMA DE DECLAR O INPUT DE QUAL DADOS SERÁ INSIRIDO, IGUAL OS DADOS QUE TEMOS NO NOSSO EMPRESTIMO MODEL-->
 
-            <div class="d-flex gap-5 mt-5">
+        <div class="d-flex gap-5 mt-5">
             <button type="submit" class="btn btn-primary btn-success w-50">Reservar</button>
             <a class="btn btn-primary w-50" asp-controller="Hotel" asp-action="Index">Voltar</a>
-            </div>
-
-
-
-
-
-
-
-
+        </div>
     </form>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    </div>
-}
+</div>

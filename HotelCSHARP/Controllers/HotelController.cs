@@ -32,22 +32,31 @@ namespace HotelCSHARP.Controllers
         [HttpPost]//ADICIONANDO O HTTPPOST EM CIMA DA ACTION, DECLARAMOS QUE A MESMA ESTÁ ENVIANDO DADOS, ENTÃO ESTÁ RETORNANDO UM METODO POST
         public IActionResult Reservar(HotelModel hotelReserva)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                hotelReserva.CheckIn = DateTime.Now; // MUDAR A LOGICA FUTURAMENTE, DEIXAR O USARIO DIGITE O DATA QUE VAI REALIZAR CHECKIN
+                // Adicione esta linha para verificar quais são os erros de validação
+                var erros = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
+                TempData["MensagemError"] = "Erro(s) de validação: " + string.Join(", ", erros);
+                return View(hotelReserva);
+            }
 
+            try
+            {
+                // Adiciona a reserva ao banco de dados
                 _db.HotelReserva.Add(hotelReserva);
                 _db.SaveChanges();
 
-                TempData["MensagemSucesso"] = "Cadastro realizado com sucesso!";//MENSAGEM DE SUCESSO DA EXCLUSÃO, EDIÇÃO E CADASTRO
-                
+                TempData["MensagemSucesso"] = "Cadastro realizado com sucesso!";
                 return RedirectToAction("Index");
             }
-            TempData["MensagemError"] = "Reserva não foi realizada com sucesso!";
-
-            return View();
+            catch (Exception ex)
+            {
+                // Em caso de exceção, exibe a mensagem de erro
+                TempData["MensagemError"] = $"Erro ao realizar reserva: {ex.Message}";
+                return View(hotelReserva);
+            }
         } //RESERVAR 
-       
+
 
 
 

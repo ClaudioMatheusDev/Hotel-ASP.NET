@@ -47,7 +47,26 @@ namespace HotelCSHARP.Controllers
 
             return View(hotelReserva);
 
-        }
+        }//EDITAR
+
+        [HttpGet]
+        public IActionResult Excluir(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+
+            HotelModel hotelReserva = _db.HotelReserva.FirstOrDefault(x => x.Id == id);
+
+            if (hotelReserva == null)
+            {
+                return NotFound();
+            }
+
+            return View(hotelReserva);
+
+        } //EXCLUIR
 
 
 
@@ -119,6 +138,24 @@ namespace HotelCSHARP.Controllers
 
         }//EDITAR
 
+
+        [HttpPost]
+        public IActionResult Excluir(HotelModel hotelReserva)
+        {
+            if (hotelReserva == null)
+            {
+                return NotFound();
+            }
+
+            _db.HotelReserva.Remove(hotelReserva);
+            _db.SaveChanges();
+
+
+            TempData["MensagemSucesso"] = "Exclusão realizada com sucesso!";
+
+            return RedirectToAction("Index");
+
+        }
 
     }
 }

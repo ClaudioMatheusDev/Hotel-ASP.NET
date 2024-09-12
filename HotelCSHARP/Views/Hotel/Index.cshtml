@@ -1,0 +1,53 @@
+﻿@model IEnumerable<HotelCSHARP.Models.HotelModel>
+
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-5">
+        <h1>Reservas</h1>
+    </div>
+
+    <div>
+
+        <a class="btn btn-success mx-2" asp-controller="Hotel" asp-action="Reservar">Realizar uma nova Reserva</a>
+
+
+    </div>
+
+
+
+    <table id="Reservas" class="table table-light table-hover mt-5">
+        <thead>
+            <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Sobrenome</th>
+                <th scope="col">Número do quarto</th>
+                <th scope="col">Status</th>
+                <th scope="col">CheckIn</th>
+                <th scope="col">CheckOut</th>
+                <th scope="col">Contato</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                @foreach (var hotelReserva in Model)
+                {
+                    <tr>
+                        <td>@hotelReserva?.Nome</td>
+                        <td>@hotelReserva?.SobreNome</td>
+                        <td>@hotelReserva?.NumeroQuarto</td>
+                        <td>@hotelReserva?.StatusReserva</td>
+                        <td>@hotelReserva?.CheckIn.ToString("dd/MM/yyyy")</td>
+                        <td>@hotelReserva?.CheckOut.ToString("dd/MM/yyyy")</td>
+                        <td>@hotelReserva?.Contato</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="7" class="text-center">Nenhuma reserva encontrada.</td>
+                </tr>
+            } <!--Retornando quando não tem nenhuma reserva-->
+        </tbody>
+    </table>
+</div>

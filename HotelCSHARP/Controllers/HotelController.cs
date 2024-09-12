@@ -29,6 +29,30 @@ namespace HotelCSHARP.Controllers
         }//RESERVAR HTTPGET, RETORNANDO A TELA DE CADASTRO
 
 
+        [HttpGet]
+        public IActionResult Editar(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+
+            }
+
+            HotelModel hotelReserva = _db.HotelReserva.FirstOrDefault(x => x.Id == id);
+
+            if (hotelReserva == null)
+            {
+                return NotFound();
+            }
+
+            return View(hotelReserva);
+
+        }
+
+
+
+
+
         [HttpPost]//ADICIONANDO O HTTPPOST EM CIMA DA ACTION, DECLARAMOS QUE A MESMA ESTÁ ENVIANDO DADOS, ENTÃO ESTÁ RETORNANDO UM METODO POST
         public IActionResult Reservar(HotelModel hotelReserva)
         {
@@ -58,10 +82,42 @@ namespace HotelCSHARP.Controllers
         } //RESERVAR 
 
 
+        [HttpPost]
+        public IActionResult Editar(HotelModel hotelReserva)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    // Encontra a reserva existente com base no ID
+                    var existingReserva = _db.HotelReserva.Find(hotelReserva.Id);
 
+                    if (existingReserva == null)
+                    {
+                        TempData["MensagemError"] = "Reserva não encontrada!";
+                        return RedirectToAction("Index");
+                    }
 
+                    // Atualiza os valores da reserva existente
+                    _db.Entry(existingReserva).CurrentValues.SetValues(hotelReserva);
 
+                    // Salva as mudanças no banco de dados
+                    _db.SaveChanges();
 
+                    TempData["MensagemSucesso"] = "Edição realizada com sucesso!";
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    TempData["MensagemError"] = $"Erro ao realizar edição: {ex.Message}";
+                    return View(hotelReserva);
+                }
+            }
+
+            TempData["MensagemError"] = "Edição não foi realizada com sucesso!";
+            return View(hotelReserva);
+
+        }//EDITAR
 
 
     }

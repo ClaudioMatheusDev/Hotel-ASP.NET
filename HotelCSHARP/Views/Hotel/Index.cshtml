@@ -55,6 +55,10 @@
                         <td>@hotelReserva?.CheckIn.ToString("dd/MM/yyyy")</td>
                         <td>@hotelReserva?.CheckOut.ToString("dd/MM/yyyy")</td>
                         <td>@hotelReserva?.Contato</td>
+                        <td>
+                            <a asp-controller="Hotel" asp-action="Editar" asp-route-id="@hotelReserva.Id" class="btn btn-warning mx-2">Editar</a>
+
+                        </td>
                     </tr>
                 }
             }

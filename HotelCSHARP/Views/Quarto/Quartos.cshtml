@@ -1,0 +1,44 @@
+﻿@model IEnumerable<QuartoModel>
+
+@{
+    ViewData["tittle"] = "Quartos do Hotel!"; // MODIFICANDO O NOME DA PAGINA
+}
+<div class="py-5">
+    <div class="container">
+
+        <div class="text-center mb-5">
+            <a class="btn btn-success">Adicionar novo quarto</a>
+        </div>
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-0">
+            @if (Model != null) //Verificando se a lista de quarto estiver nulo
+            {
+                @if (Model.Count() > 0)
+                {
+                    @foreach (var quartos in Model)
+                    {
+                       // <div class="card mx-3 my-3 p-2" style="width: 12rem">
+
+                       // @if()
+                       // </div>
+
+                       <div class="card-body">
+                           <h5 class="card-title">@quartos.NumeroQuarto</h5>
+                       </div>
+
+                       <div class="card-body">
+                           <a class="btn btn-warning w-100" asp-action="VerQuarto" asp-controller="Quarto">Ver informações do quarto</a>
+                       </div>
+
+                    }
+                }
+
+            }
+
+
+        </div>
+
+
+
+    </div>
+</div>

@@ -12,6 +12,8 @@ namespace HotelCSHARP.Data
 
         public DbSet<HotelModel> HotelReserva { get; set; } //Criando a tabela reserva
 
+        public DbSet<QuartoModel> QuartoReserva { get; set; } //Criando a tabela reserva
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

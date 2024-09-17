@@ -26,7 +26,7 @@ namespace HotelCSHARP.Controllers
         public IActionResult Reservar()
         {
             return View();
-        }//RESERVAR HTTPGET, RETORNANDO A TELA DE CADASTRO
+        }
 
 
         [HttpGet]

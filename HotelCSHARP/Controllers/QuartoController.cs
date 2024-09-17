@@ -29,5 +29,52 @@ namespace HotelCSHARP.Controllers
             return View();
         }
 
-    }
+
+
+
+        [HttpGet] //ACTION COM O MESMO NOME CADASTRAR, A MESMA AUTOMATICAMENTE ESTÁ RETORNANDO O METODO GET
+        public IActionResult Cadastrar()
+        {
+            return View();
+        }
+
+
+
+
+
+
+
+
+
+
+        [HttpPost] //ADICIONANDO O HTTPPOST EM CIMA DA ACTION, DECLARAMOS QUE A MESMA ESTÁ ENVIANDO DADOS, ENTÃO ESTÁ RETORNANDO UM METODO POST
+        public IActionResult Cadastrar(QuartoModel quartoCadastro)
+        {
+            if (ModelState.IsValid)//Se o status da model for valido (se a conexão do banco de dados for valida) 
+            {
+
+
+                _db.QuartoReserva.Add(quartoCadastro); //Entrando no banco de dados, na tabela QuartoReserva e adicionado novas informações
+                _db.SaveChanges(); //Entrando no banco de dados e salvando as novas informações adicionadas
+
+                TempData["MensagemSucesso"] = "Cadastro realizado com sucesso!";//MENSAGEM DE SUCESSO DA EXCLUSÃO, EDIÇÃO E CADASTRO
+
+
+                return RedirectToAction("Index"); //Depois de tudo salvo, redireciona o usuario para a pagina index
+            }
+            TempData["MensagemError"] = "Cadastro não foi realizado com sucesso!";
+
+            return View(); //CASO O IF NÃO FOR VALIDO, O MESMO RETORNA O USUARIO PARA A VIEW(CADASTRAR) 
+
+        }
+    } //Cadastrar Quarto 
+
+
+
+
+
+
 }
+
+
+

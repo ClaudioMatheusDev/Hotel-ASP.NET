@@ -1,0 +1,55 @@
+﻿@model HotelCSHARP.Models.QuartoModel
+
+@{
+    ViewData["tittle"] = "Adicionar novo quarto!"; // MODIFICANDO O NOME DA PAGINA
+}
+
+<div class="container bg-dark p-5 rounded-5">
+    <div class="mb-5 text-center">
+        <h1 class="text-light">Adicionar um novo quarto</h1>
+    </div>
+
+    <form method="post" asp-controller="Quarto" asp-action="Cadastrar">
+       
+        <div class="mb-3">
+            <label for="NumeroQuarto" class="form-label text-light">Numero:</label>
+            <input type="number" class="form-control text-dark" asp-for="NumeroQuarto" id="NumeroQuarto" placeholder="Número do quarto:" />
+            <span class="text-danger" asp-validation-for="NumeroQuarto"></span>
+        </div>
+
+        <div class="mb-3">
+            <label for="Tipo" class="form-label text-light">Tipo:</label>
+            <input type="text" class="form-control text-dark" asp-for="Tipo" id="Tipo" placeholder="Tipos: Suite, normal" />
+            <span class="text-danger" asp-validation-for="Tipo"></span>
+        </div>
+
+        <div class="mb-3">
+            <label for="Capacidade" class="form-label text-light">Capacidade de pesssoas:</label>
+            <input type="number" class="form-control text-dark" asp-for="Capacidade" id="Capacidade" placeholder="Capacidade:" />
+            <span class="text-danger" asp-validation-for="Capacidade"></span>
+        </div>
+
+        <div class="mb-3">
+            <label for="PrecoPorNoite" class="form-label text-light">Preço por Noite:</label>
+            <input type="number" step="0.01" class="form-control text-dark" asp-for="PrecoPorNoite" id="PrecoPorNoite" placeholder="Preço por noite:" />
+            <span class="text-danger" asp-validation-for="PrecoPorNoite"></span>
+        </div>
+
+        <div class="mb-3">
+            <label for="EstaDisponivel" class="form-label text-light">Está disponivel:</label>
+            <input type="text" class="form-control text-dark" asp-for="EstaDisponivel" id="EstaDisponivel" />
+            <span class="text-danger" asp-validation-for="EstaDisponivel"></span>
+        </div>
+
+        <div class="mb-3">
+            <label for="Descricao" class="form-label text-light">Descrição</label>
+            <input type="text" class="form-control text-dark" asp-for="Descricao" id="Descricao" />
+            <span class="text-danger" asp-validation-for="Descricao"></span>
+        </div>
+
+         <div class="d-flex gap-5 mt-5">
+            <button type="submit" class="btn btn-primary btn-success w-50">Cadastrar quarto!</button>
+            <a class="btn btn-primary w-50" asp-controller="Hotel" asp-action="Index">Voltar</a>
+        </div>
+    </form>
+</div>
